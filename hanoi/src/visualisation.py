@@ -167,11 +167,12 @@ def update_disclist(poleinit, polefin, poles, noofdiscs, win):
     # globaldisclist still differ.
     return globaldisclist
 
-def main():
+def visualisation(noofdiscs, moves):
 
     xres=800
     yres=400
-    noofdiscs=4
+    #print "The number of discs is", noofdiscs
+    #print "The moves list is", moves
     # Creates the graphics window.
     win = GraphWin("Pole Class",xres,yres)
     # This command flips the y-axis s.t. origin is in the bottom-left.
@@ -198,10 +199,6 @@ def main():
                     13*xres/16, 3*yres/8,
 		    globaldisclist[2], win)
 
-    with open('moves') as f:
-        # Reads a list of lists as a list of lists.
-        moves = json.load(f)
-
     for j in range(0, len(moves)):
         # Update the disclist inputting the initial pole, final pole,
 	# the set of pole classes and the number of discs.
@@ -221,4 +218,3 @@ def main():
     # This command only allows win to close when the user clicks.
     win.getMouse()
 
-main()
