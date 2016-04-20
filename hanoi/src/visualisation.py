@@ -36,8 +36,8 @@ class pole:
         given by disclist.
         '''
 
-	# Graphics window win associated with pole s.t. it doesn't need to be
-	# called every time a method is used.
+        # Graphics window win associated with pole s.t. it doesn't need to be
+        # called every time a method is used.
         self.win = win
 
         # Pole attributes
@@ -50,8 +50,8 @@ class pole:
         self.disclist = disclist
         self.noofdiscs = noofdiscs
         self.discx = [0] * self.noofdiscs
-	# This loop defines the disc sizes in terms of the noofdiscs and
-	# the x/y window resolution.
+        # This loop defines the disc sizes in terms of the noofdiscs and
+        # the x/y window resolution.
         for i in range(1, self.noofdiscs+1):
             self.discx[i-1] = xres/4 - \
                               float(i-1)/(self.noofdiscs-1)*float(xres)/8
@@ -89,7 +89,7 @@ class pole:
             # If i'th disclist element of pole and global differ, then..
             if self.disclist[i] != newdisclist[i]:
                 # Make sure that the slot is filled before undrawing.
-		if self.disclist[i] != 0:
+                if self.disclist[i] != 0:
                     # Undraw the disc there
                     self.discs[i].undraw()
 
@@ -138,7 +138,7 @@ def update_disclist(poleinit, polefin, poles, noofdiscs, win):
     while (i < noofdiscs and poles[poleinit].disclist[i] != 0):
         i += 1
     if i == 0:
-	sys.exit("ERROR: initial pole empty, so no disc can be moved from it.")
+        sys.exit("ERROR: initial pole empty, so no disc can be moved from it.")
     initslot = i-1
 
     i = 0
@@ -168,13 +168,11 @@ def update_disclist(poleinit, polefin, poles, noofdiscs, win):
     return globaldisclist
 
 def visualisation(noofdiscs, moves):
-
+    # Define the resolution of the graphics window.
     xres=800
     yres=400
-    #print "The number of discs is", noofdiscs
-    #print "The moves list is", moves
     # Creates the graphics window.
-    win = GraphWin("Pole Class",xres,yres)
+    win = GraphWin("The Tower of Hanoi",xres,yres)
     # This command flips the y-axis s.t. origin is in the bottom-left.
     win.yUp()
 
@@ -194,27 +192,26 @@ def visualisation(noofdiscs, moves):
                     globaldisclist[0], win)
     poles[1] = pole(xres, yres, noofdiscs,
                     8*xres/16, 3*yres/8,
-		    globaldisclist[1], win)
+                    globaldisclist[1], win)
     poles[2] = pole(xres, yres, noofdiscs,
                     13*xres/16, 3*yres/8,
-		    globaldisclist[2], win)
+                    globaldisclist[2], win)
 
     for j in range(0, len(moves)):
         # Update the disclist inputting the initial pole, final pole,
-	# the set of pole classes and the number of discs.
-	globaldisclist = update_disclist(moves[j][0], moves[j][1],
+        # the set of pole classes and the number of discs.
+        globaldisclist = update_disclist(moves[j][0], moves[j][1],
                                          poles, noofdiscs, win)
 
         # This is 1 second sleep is just here to see moves clearly.
         time.sleep(1)
 
         # We are changing update s.t. it takes the globaldisclist as an
-	# argument. Hence we can compare the pole's disclist to globaldisclist
-	# and undraw/draw differences.
+        # argument. Hence we can compare the pole's disclist to globaldisclist
+        # and undraw/draw differences.
         poles[0].update(globaldisclist[0])
         poles[1].update(globaldisclist[1])
         poles[2].update(globaldisclist[2])
 
     # This command only allows win to close when the user clicks.
     win.getMouse()
-

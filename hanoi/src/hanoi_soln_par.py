@@ -13,6 +13,7 @@ from mpi4py import MPI
 import sys
 import time
 import math
+import pickle
 comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
@@ -33,7 +34,7 @@ def tower(src, dest, temp, idx, offset, noofdiscs, plan):
             tower(src, temp, dest, idx-offset, offset/2, noofdiscs, plan);
 
             # Add some dead time here.
-            time.sleep(2)
+            time.sleep(1)
             # Adds the src and dest poles of move to the plan array.
             plan[idx-1][0] = src;
             plan[idx-1][1] = dest;
@@ -76,11 +77,12 @@ def tower(src, dest, temp, idx, offset, noofdiscs, plan):
     return plan
 
 
-def hanoi_soln_par(noofdiscs):
+def main():
     # Initialise the number of discs and the list for containing plan.
     # Initially it is populated with pairs of zeroes [0, 0], s.t. the number
     # of pairs is equal to the number of moves.
-    #noofdiscs = int(sys.argv[1])
+    #print "The number of processes is", size, "and this is process", rank
+    noofdiscs = int(sys.argv[1])
     plan_init = []
     for i in range(0,2**noofdiscs-1):
         plan_init.append([0, 0])
@@ -103,5 +105,12 @@ def hanoi_soln_par(noofdiscs):
     # from each list returned from the processes and bundles it all into one
     # list, the solution.
     if rank == 0:
-            return [max(i) for i in zip(*allplans)]
+            plan=[max(i) for i in zip(*allplans)]
             #print 'master:',allplans
+
+            # We use pickle to make a moves file which we write the
+            # plan list. We use pickle in main() to read the list again.
+            outfile=open( "moves", "wb" )
+            pickle.dump(plan, outfile)
+
+main()
