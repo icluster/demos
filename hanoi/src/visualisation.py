@@ -12,14 +12,6 @@
 import sys
 import time
 from graphics import *
-import json
-# Used to load lists of lists in text files as lists of lists.
-
-# This command sets all python process in front of all other windows.
-os.system(
-    '''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process \
-    "Python" to true' '''
-    )
 
 
 class pole:
@@ -168,6 +160,13 @@ def update_disclist(poleinit, polefin, poles, noofdiscs, win):
     return globaldisclist
 
 def visualisation(noofdiscs, moves):
+
+    # This command sets all python process in front of all other windows.
+    os.system(
+        '''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process \
+        "Python" to true' '''
+    )
+
     # Define the resolution of the graphics window.
     xres=800
     yres=400

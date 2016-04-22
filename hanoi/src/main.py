@@ -5,23 +5,35 @@ import subprocess
 import pickle
 import sys
 import math
-#from hanoi_soln_par import hanoi_soln_par
 from visualisation import visualisation
 
 def main ():
-    # The number of discs is hardcoded here for now.
-    # We could add it as an argument at the command line or prompt for it.
-    noofdiscs = 3
+    # Prompts user for the number of discs.
+    noofdiscs = raw_input("Please enter the number of discs: ")
+    # Checks if noofdiscs is an integer. Terminates program if not.
+    if (noofdiscs.isdigit() == False):
+        sys.exit("ERROR: number of discs must be a positive integer.")
+    # Checks if noofdiscs is positive. Terminates program if not.
+    if (int(noofdiscs) <= 0):
+        sys.exit("ERROR: number of discs must be a positive integer.")
     # The code doesn't work if the number of discs equals 1, so we'll
     # sys.exit when noofdiscs == 1.
     if (noofdiscs == 1):
         sys.exit("Surely you can figure this solution out for yourself?")
+    # Make sure noofdiscs is an integer.
+    noofdiscs = int(noofdiscs)
 
-    # The number of processes is defined here.
-    noofprocs = 1
+    # Prompts user for the number of processes.
+    noofprocs = raw_input("Please enter the number of processes: ")
+    # Checks if noofprocs is an integer. Terminates program if not.
+    if (noofprocs.isdigit() == False):
+        sys.exit("ERROR: number of processes must be a positive integer.")
+    # Checks if noofprocs is positive. Terminates program if not.
+    if (float(noofprocs) <= 0):
+        sys.exit("ERROR: number of processess must be a positive integer.")
     # The solver doesn't work if the number of processes isn't a power
     # of 2, so we'll sys.exit when that isn't the case.
-    poweroftwo=(math.log(noofprocs, 2)).is_integer()
+    poweroftwo=(math.log(float(noofprocs), 2)).is_integer()
     if (poweroftwo == False):
         sys.exit("ERROR: the number of processes must be a power of 2.")
 
