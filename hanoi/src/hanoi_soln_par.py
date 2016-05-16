@@ -17,6 +17,7 @@ import pickle
 comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
+name = MPI.Get_processor_name()
 
 
 def tower(src, dest, temp, idx, offset, noofdiscs, plan):
