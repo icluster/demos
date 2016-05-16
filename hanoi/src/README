@@ -1,0 +1,23 @@
+The tower of Hanoi (https://en.wikipedia.org/wiki/Tower_of_Hanoi) is a problem
+that consists of a three poles arranged in a straight-line left to right, with
+a number of discs on the leftmost pole. The discs are arranged such that the
+largest disc is at the bottom with consecutively smaller discs above it, with
+the smallest disc on top. The problem is to get all the discs onto the
+rightmost pole by moving individual discs one at a time, whilst only placing
+discs onto larger discs.
+
+The tower of Hanoi solver that we have written is based on:
+http://www.drdobbs.com/parallel/rebuilding-the-tower-of-hanoi/232500363.
+The solution given is a recursive solution, i.e. it uses a function that calls
+itself during runtime, and thus a sequence of recursive calls eventually
+yields the solution.
+
+The solution is a parallel solution, meaning that the solver can utilise
+multiple processes to get the solution. These processes can be assigned to
+separate CPUs or different computers (usually called nodes in parallel
+computing.) The code can be used simply by running the module main.py. The user
+will be prompted to enter the number of discs the solver will solve for, and
+then the number of processes the code will be run on. Once the solver finishes
+it will output the time that it took to obtain the solution. Once it has done
+this, a graphics window will open and visualise the solution to show that the
+code got the answer right!

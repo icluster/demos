@@ -40,13 +40,13 @@ def main ():
     # Calls the hanoi parallel solver and runs it in parallel with the
     # number of processes specified. It also passes the number of discs
     # as an argument for the hanoi_soln_par.py script.
-    tick=time.time()
+    tick = time.time()
     os.system("mpiexec -n "
               + str(noofprocs)
               + " hanoi_soln_par.py"
               + " "
               + str(noofdiscs))
-    print "The time the solver took was ", time.time()-tick
+    print "The time the solver took was", time.time()-tick, "seconds"
 
     # The solver script hanoi_soln_par.py write the solution to pickle
     # file 'moves'. These commands read the solution to the moves list.
