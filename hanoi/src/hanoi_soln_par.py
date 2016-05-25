@@ -98,16 +98,17 @@ def main():
     # distributed across the processes used in the calculation.
     plan = tower(0, 2, 1, idx, offset, noofdiscs, plan_init)
 
-    # Process 0 now gathers all the modified elements of data together into a new
-    # list called allplans.
+    # Process 0 now gathers all the modified elements of data together into a 
+    # new list called allplans.
     allplans = comm.gather(plan,root=0)
+    #print 'allplans:',allplans
     # The command gather has stuffed a bunch of mostly empty data lists into a
     # list. The first command essentially picks out all the non-trivial data
     # from each list returned from the processes and bundles it all into one
     # list, the solution.
     if rank == 0:
             plan=[max(i) for i in zip(*allplans)]
-            #print 'master:',allplans
+            #print 'master:',plan
 
             # We use pickle to make a moves file which we write the
             # plan list. We use pickle in main() to read the list again.

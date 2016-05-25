@@ -7,6 +7,7 @@ import math
 from visualisation import visualisation
 import time
 
+
 def main ():
     # Prompts user for the number of discs.
     noofdiscs = raw_input("Please enter the number of discs: ")
@@ -37,12 +38,29 @@ def main ():
     if (poweroftwo == False):
         sys.exit("ERROR: the number of processes must be a power of 2.")
 
+    # Builds the list of hosts used from the number of processes.
+    # We could randomise this if we want.
+    noofprocs = int(noofprocs)
+    hostlist = ["master"]
+    for i in range(1, noofprocs):
+        host = "pi" + str(i)
+        hostlist.append(host)
+
+    # Prints out a list of the hosts and the processes they will run.
+    for i in range(0, noofprocs):
+        print hostlist[i],'is running process',i+1
+
+    # The list needs to be converted to a string of strings separated by
+    # commas for mpiexec to read it as a host list.
+    hostlist = ",".join(hostlist)
+
     # Calls the hanoi parallel solver and runs it in parallel with the
     # number of processes specified. It also passes the number of discs
     # as an argument for the hanoi_soln_par.py script.
     tick = time.time()
     os.system("mpiexec -n "
               + str(noofprocs)
+              + " -host " + hostlist
               + " hanoi_soln_par.py"
               + " "
               + str(noofdiscs))
