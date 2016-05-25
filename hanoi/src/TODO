@@ -1,10 +1,8 @@
-We are currently trying to incorporate the code in hoststest.py in ~ of
-pi@master to get the hanoi code to run on multiple hosts, i.e. multiple
-raspberry pis! However, when we try and do that main can't find the moves
-file that it needs to pass to the visualisation module. This is because the
-solver hanoi_soln_par.py is gathering all the moves arrays to process root 0.
-Process root 0 will usually be pi1, whereas it should be gathering at
-pi@master since that's what's running the show!
-
-It should be an easy fix to get all the gathering and creation of the full
-moves list to happen on pi@master. We'll do that some other time.
+What we'd like to do next is get each RP to send a print statement like:
+"pi1 currently running process 1"
+In order to do this while the solver code is running we'd need to write
+the print statement and send all the print statements from all the hosts to
+master. We should be able to do this using gather, but that's not working at
+the moment. This gather command seems to be clashing with a later gather
+command that's used to build the complete list of moves for the solution to
+the tower of hanoi problem.
