@@ -15,13 +15,18 @@ yields the solution.
 The solution is a parallel solution, meaning that the solver can utilise
 multiple processes to get the solution. These processes can be assigned to
 separate CPUs or different computers (usually called nodes in parallel
-computing.) 
+computing.)
 
 How to run:
 
-The code can be used simply by running the module main.py. The user
-will be prompted to enter the number of discs the solver will solve for, and
-then the number of processes the code will be run on. Once the solver finishes
-it will output the time that it took to obtain the solution. Once it has done
-this, a graphics window will open and visualise the solution to show that the
-code got the answer right!
+You will need to have Python installed, the full contents of the hanoi/src
+directory and mpi4py installed to run this code.
+
+When running the code on the Raspberry Pi cluster simply run the module called
+main.py. If you're not running it on the cluster first delete the file called
+'hostlist', or move it to another directory. Then you can run main.py. The
+user will be prompted to enter the number of discs the solver will solve for,
+and then the number of processes the code will be run on. Once the solver
+finishes it will output the time that it took to obtain the solution. Once it
+has done this, a graphics window will open and visualise the solution to show
+that the code got the answer right!

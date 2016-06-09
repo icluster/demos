@@ -98,7 +98,7 @@ def main():
     # distributed across the processes used in the calculation.
     plan = tower(0, 2, 1, idx, offset, noofdiscs, plan_init)
 
-    # Process 0 now gathers all the modified elements of data together into a 
+    # Process 0 now gathers all the modified elements of data together into a
     # new list called allplans.
     allplans = comm.gather(plan,root=0)
     #print 'allplans:',allplans

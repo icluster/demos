@@ -9,10 +9,10 @@
  function yUp.
 '''
 
+import os
 import sys
 import time
 from graphics import *
-
 
 class pole:
     ''' This is the pole class as it stands. It initialises by drawing all the discs
@@ -161,11 +161,11 @@ def update_disclist(poleinit, polefin, poles, noofdiscs, win):
 
 def visualisation(noofdiscs, moves):
 
-#    # This command sets all python process in front of all other windows.
-#    os.system(
-#        '''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process \
-#        "Python" to true' '''
-#    )
+    # This command sets all python process in front of all other windows.
+    os.system(
+        '''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process \
+        "Python" to true' 2> /dev/null'''
+    )
 
     # Define the resolution of the graphics window.
     xres=800
