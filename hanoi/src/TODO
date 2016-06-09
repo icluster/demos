@@ -1,10 +1,10 @@
-We are currently trying to incorporate the code in hoststest.py in ~ of
-pi@master to get the hanoi code to run on multiple hosts, i.e. multiple
-raspberry pis! However, when we try and do that main can't find the moves
-file that it needs to pass to the visualisation module. This is because the
-solver hanoi_soln_par.py is gathering all the moves arrays to process root 0.
-Process root 0 will usually be pi1, whereas it should be gathering at
-pi@master since that's what's running the show!
+We have now got multiple RPs solving the tower of hanoi problem all at once
+by running 1 separate process each. What we want to do is have each RP print
+something like "I am RP 6 and am running process 6" as it runs during the
+solver.
 
-It should be an easy fix to get all the gathering and creation of the full
-moves list to happen on pi@master. We'll do that some other time.
+Unfortunately that hasn't worked because gathering all those strings from each
+RP to the master didn't work. If master doesn't get them all it can't print
+them all. Hence we've made a quick fix of just using the pre-made list of host
+names to print out the messages before the solver even runs. It's a cheat, but
+it does the job.

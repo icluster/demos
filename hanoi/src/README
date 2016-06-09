@@ -15,7 +15,11 @@ yields the solution.
 The solution is a parallel solution, meaning that the solver can utilise
 multiple processes to get the solution. These processes can be assigned to
 separate CPUs or different computers (usually called nodes in parallel
-computing.) The code can be used simply by running the module main.py. The user
+computing.) 
+
+How to run:
+
+The code can be used simply by running the module main.py. The user
 will be prompted to enter the number of discs the solver will solve for, and
 then the number of processes the code will be run on. Once the solver finishes
 it will output the time that it took to obtain the solution. Once it has done

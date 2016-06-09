@@ -38,32 +38,40 @@ def main ():
     if (poweroftwo == False):
         sys.exit("ERROR: the number of processes must be a power of 2.")
 
-    # Builds the list of hosts used from the number of processes.
-    # We could randomise this if we want.
-    noofprocs = int(noofprocs)
-    hostlist = ["master"]
-    for i in range(1, noofprocs):
-        host = "pi" + str(i)
-        hostlist.append(host)
-
-    # Prints out a list of the hosts and the processes they will run.
-    for i in range(0, noofprocs):
-        print hostlist[i],'is running process',i+1
-
-    # The list needs to be converted to a string of strings separated by
-    # commas for mpiexec to read it as a host list.
-    hostlist = ",".join(hostlist)
-
-    # Calls the hanoi parallel solver and runs it in parallel with the
-    # number of processes specified. It also passes the number of discs
-    # as an argument for the hanoi_soln_par.py script.
-    tick = time.time()
-    os.system("mpiexec -n "
-              + str(noofprocs)
-              + " -host " + hostlist
-              + " hanoi_soln_par.py"
-              + " "
-              + str(noofdiscs))
+    # Check if there is a hostlist file. If there is read the list of hosts
+    # and uses those hosts to run the solver. If the file is empty or missing
+    # then run the solver without a list of hosts.
+    try:
+        if os.stat('hostlist').st_size > 0:
+            # Reads the hostlist file
+            hostlist = [line.strip('\n') for line in open('hostlist')]    
+            # Prints out a list of the hosts and the processes they will run.
+            noofprocs = int(noofprocs)
+            for i in range(0, noofprocs):
+                print hostlist[i],'is running process',i+1
+            # Prepares the hostlist for the mpiexec command.
+            hostlist = ",".join(hostlist)
+            tick = time.time()
+            os.system("mpiexec -n "
+                      + str(noofprocs)
+                      + " -host " + hostlist
+                      + " hanoi_soln_par.py"
+                      + " "
+                      + str(noofdiscs))
+        else:            
+            tick = time.time()
+            os.system("mpiexec -n "
+                      + str(noofprocs)
+                      + " hanoi_soln_par.py"
+                      + " "
+                      + str(noofdiscs))
+    except OSError:
+        tick = time.time()
+        os.system("mpiexec -n "
+                      + str(noofprocs)
+                      + " hanoi_soln_par.py"
+                      + " "
+                      + str(noofdiscs))
     print "The time the solver took was", time.time()-tick, "seconds"
 
     # The solver script hanoi_soln_par.py write the solution to pickle
@@ -77,5 +85,5 @@ def main ():
 
     # Now that we've finished with the moves file we'd better delete it
     os.system("rm moves")
-
+     
 main ()
