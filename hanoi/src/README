@@ -20,7 +20,7 @@ computing.)
 How to run:
 
 You will need to have Python installed, the full contents of the hanoi/src
-directory and mpi4py installed to run this code.
+directory, and mpi4py installed to run this code.
 
 When running the code on the Raspberry Pi cluster simply run the module called
 main.py. If you're not running it on the cluster first delete the file called

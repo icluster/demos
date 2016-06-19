@@ -1,13 +1,6 @@
-- Edit main.py to read a hostlist file to get the names of the hosts. If there
-  is no list or it's empty, then just run mpiexec without the " -host " +
-  hostlist option. This will allow anyone to run the code on any machine with
-  python installed.
 - Get the visualisation to jump to the front of all other windows on all
   platforms without an error message appearing. We may have solved this,
   test it on the RP cluster.
-- Get the Tower of Hanoi model and play with it to see how long it takes for
-  a person to solve the problem. Use the average time per move as the sleep
-  handicap in the hanoi_soln_par.py module.
 - Make sure Simon Foster gets a chalk board for keeping track of the top 10
   times for solving the Tower of Hanoi. Whoever gets into the top 10 gets to
   name one of the RPs!

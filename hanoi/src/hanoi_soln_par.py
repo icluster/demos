@@ -7,6 +7,16 @@ The solution has been modified from drdobbs' solution to work with my limited
 knowledge of mpi4py. If you use the sleep() functionality to add some dead
 time into the loops - even a second will do - you'll start to see the
 computation time decrease as the number of processes increases.
+
+Currently the dead time is set to 2 seconds. The solution times for this dead
+time are:
+1 proc  30.50s
+2 procs 17.03s
+4 procs 11.14s
+8 procs 9.28s
+
+It's very hard to solve the problem in less than 12 seconds. I haven't been
+able to do it!
 '''
 
 from mpi4py import MPI
@@ -35,14 +45,14 @@ def tower(src, dest, temp, idx, offset, noofdiscs, plan):
             tower(src, temp, dest, idx-offset, offset/2, noofdiscs, plan);
 
             # Add some dead time here.
-            time.sleep(1)
+            time.sleep(2)
             # Adds the src and dest poles of move to the plan array.
             plan[idx-1][0] = src;
             plan[idx-1][1] = dest;
 
         elif (rank % 2**(level+1) >= 2**(level) and 2**(level) < size):
             # Add some dead time here.
-            time.sleep(1)
+            time.sleep(2)
             # Adds the src and dest poles of move to the plan array.
             plan[idx-1][0] = src;
             plan[idx-1][1] = dest;
@@ -57,7 +67,7 @@ def tower(src, dest, temp, idx, offset, noofdiscs, plan):
             tower(src, temp, dest, idx-offset, offset/2, noofdiscs, plan);
 
             # Add some dead time here.
-            time.sleep(1)
+            time.sleep(2)
             # Adds the src and dest poles of move to the plan array.
             plan[idx-1][0] = src;
             plan[idx-1][1] = dest;
@@ -68,7 +78,7 @@ def tower(src, dest, temp, idx, offset, noofdiscs, plan):
 
     else:
         # Add some dead time here.
-        time.sleep(1)
+        time.sleep(2)
         # Once offset reaches zero the algorithm stops recursively calling
         # tower. Hence all that is left to do is populate the last elements
         # of the plan list.
