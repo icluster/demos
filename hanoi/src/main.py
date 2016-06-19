@@ -39,12 +39,12 @@ def main ():
         sys.exit("ERROR: the number of processes must be a power of 2.")
 
     # Check if there is a hostlist file. If there is read the list of hosts
-    # and uses those hosts to run the solver. If the file is empty or missing
+    # and use those hosts to run the solver. If the file is empty or missing
     # then run the solver without a list of hosts.
     try:
         if os.stat('hostlist').st_size > 0:
             # Reads the hostlist file
-            hostlist = [line.strip('\n') for line in open('hostlist')]    
+            hostlist = [line.strip('\n') for line in open('hostlist')]
             # Prints out a list of the hosts and the processes they will run.
             noofprocs = int(noofprocs)
             for i in range(0, noofprocs):
@@ -58,7 +58,7 @@ def main ():
                       + " hanoi_soln_par.py"
                       + " "
                       + str(noofdiscs))
-        else:            
+        else:
             tick = time.time()
             os.system("mpiexec -n "
                       + str(noofprocs)
@@ -85,5 +85,5 @@ def main ():
 
     # Now that we've finished with the moves file we'd better delete it
     os.system("rm moves")
-     
+
 main ()
